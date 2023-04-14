@@ -10,14 +10,7 @@
     <h1>Here are your movies</h1>
     <% movies.forEach((movie)=>{ %>
         <section class="movie-details">
-            <h3><%=movie.title%></h3>
-            <h5>Release year <%=movie.releaseYear%></h5>
-            <p>Rating: <%=movie.rating%></p>
-            <% if(movie.nowShowing){ %>
-                <p>Now showing!</p>
-            <% }else { %>
-                <p>This movie is not showing in your area.</p>
-            <% } %>
+            <h3><a href="/movies/<%=movie._id%>"><%=movie.title%></a></h3>
         </section>
     <% }) %>
 </body>

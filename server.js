@@ -8,8 +8,11 @@ const app = express();
 // load and mount middleware
 const moviesRouter = require('./routes/movies')
 const morgan = require('morgan')
+const methodOverride = require('method-override')
 
 app.set('view engine', 'ejs')
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 // Gives us form data as req.body
 app.use(express.urlencoded({ extended: false }));
