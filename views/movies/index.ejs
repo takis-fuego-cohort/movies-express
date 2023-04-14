@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here are your movies</h1>
+    <% movies.forEach((movie)=>{ %>
+        <section class="movie-details">
+            <h3><%=movie.title%></h3>
+            <h5>Release year <%=movie.releaseYear%></h5>
+            <p>Rating: <%=movie.rating%></p>
+            <% if(movie.nowShowing){ %>
+                <p>Now showing!</p>
+            <% }else { %>
+                <p>This movie is not showing in your area.</p>
+            <% } %>
+        </section>
+    <% }) %>
+</body>
+</html>
