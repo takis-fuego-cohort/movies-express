@@ -1,4 +1,3 @@
-const { find } = require('../models/movie')
 const Movie = require('../models/movie')
 
 const moviesController = {
@@ -9,6 +8,23 @@ const moviesController = {
         res.render('movies/index', {
             movies: movies
         })
+    },
+    new: (req, res) => {
+        res.render('movies/new')
+    },
+    create: async (req, res) => {
+        try{
+            if(req.body.nowShowing === "on"){
+                req.body.nowShowing = true
+            }else{
+                req.body.nowShowing = false
+            }
+            const newMovie = await Movie.create(req.body)
+            res.redirect(`/movies/${newMovie._id}`)
+        }catch(err){
+            console.log(err);
+            res.send(err)
+        }
     }
 }
 

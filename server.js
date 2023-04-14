@@ -11,6 +11,8 @@ const morgan = require('morgan')
 
 app.set('view engine', 'ejs')
 app.use(morgan('dev'))
+// Gives us form data as req.body
+app.use(express.urlencoded({ extended: false }));
 // ANY route starting with /movies in the url...
 // Send it over to the moviesRouter to complete the job
 app.use('/movies', moviesRouter)
