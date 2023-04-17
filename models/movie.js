@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
-
+const reviewSchema = new mongoose.Schema({
+    content: String,
+    rating: {
+        type: Number,
+        min: 1,
+        max: 5
+    }
+})
 const movieSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -10,7 +17,11 @@ const movieSchema = new mongoose.Schema({
         type: String,
         enum: ['G', 'PG', 'PG13', 'R', 'NR'],
     },
-    nowShowing: Boolean
+    nowShowing: Boolean,
+    reviews: [reviewSchema]
+    // One-To-Many Relationship
+    // One-To-One Relationship
+    // Many-To-Many Relationship
 })
 
 const Movie = mongoose.model('Movie', movieSchema);
