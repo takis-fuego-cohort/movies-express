@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <%- include('../partials/_navbar') %>
     <h1>Edit <%= movie.title %></h1>
     <form action="/movies/<%=movie._id%>?_method=PUT" method="POST">
         <label for="title">Title:</label>

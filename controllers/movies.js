@@ -1,4 +1,5 @@
 const Movie = require('../models/movie')
+const Performer = require('../models/performer')
 
 const moviesController = {
     index: async (req, res)=>{
@@ -29,9 +30,13 @@ const moviesController = {
     show: async (req, res) => {
         // get the movie from the db
         const movie = await Movie.findById(req.params.id)
+                                 .populate('cast')
+        // get all performers so we can populate the dropdown
+        const performers = await Performer.find();
         // send it to the template
         res.render('movies/show', {
-            movie: movie
+            movie: movie,
+            performers
         })
     },
     delete: async (req, res) => {
@@ -67,6 +72,24 @@ const moviesController = {
         }catch(err){
             res.send(err)
         }
+    },
+    addPerformer: async (req, res) => {
+        try{
+            if(!req.body.performerId){
+                throw new Error("must have performer id")
+            }
+            // grab the movie we are adding the performer to
+            const movie = await Movie.findById(req.params.id)
+            // add the performerId to the array of ids in movie
+            movie.cast.push(req.body.performerId) 
+            // save the movie
+            await movie.save()
+            // redirect to the show page
+            res.redirect(`/movies/${movie._id}`)
+        }catch(err){
+            res.send(err)
+        }
+
     }
 }
 

@@ -16,4 +16,6 @@ router.get('/:id/edit', moviesController.edit)
 
 router.put('/:id', moviesController.update)
 
+router.post('/:id/performers', moviesController.addPerformer)
+
 module.exports = router;

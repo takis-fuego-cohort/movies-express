@@ -22,10 +22,15 @@ const movieSchema = new mongoose.Schema({
         enum: ['G', 'PG', 'PG13', 'R', 'NR'],
     },
     nowShowing: Boolean,
-    reviews: [reviewSchema]
     // One-To-Many Relationship
-    // One-To-One Relationship
+    reviews: [reviewSchema],
     // Many-To-Many Relationship
+    cast: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Performer'
+    }],
+    // One-To-One Relationship
+
 })
 
 const Movie = mongoose.model('Movie', movieSchema);
