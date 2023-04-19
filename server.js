@@ -32,6 +32,8 @@ app.use((req, res, next)=>{
 // ANY route starting with /movies in the url...
 // Send it over to the moviesRouter to complete the job
 app.use('/movies', moviesRouter)
+
+
 // Reviews Router will have to handle various request urls:
 // /movies/movie_id/reviews
 // /reviews/:review_id

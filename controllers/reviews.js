@@ -15,6 +15,27 @@ const reviewsController = {
         }catch(err){
             res.send(err)
         }
+    },
+    createApi: async (req, res) => {
+        try{
+            // get the movie to attach the review to
+            const movie = await Movie.findById(req.params.movie_id)
+            // attach the review data to the movie
+            const reviewToCreate = req.body
+            movie.reviews.push(reviewToCreate)
+            // save the movie to the database
+            await movie.save()
+            // return the user to the movie show page
+            res.json({
+                success: true,
+                status: 200,
+                data: {
+                    review: reviewToCreate
+                }
+            })
+        }catch(err){
+            res.send(err)
+        }
     }
 }
 

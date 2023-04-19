@@ -8,7 +8,7 @@ addReviewForm.addEventListener('submit', async (e)=>{
     }else if(reviewContent.value.length < 10){
         alert("That's a lazy review. keep going")
     }else{
-        const response = await fetch(addReviewForm.action, {
+        const response = await fetch(`${addReviewForm.action}/api`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -21,6 +21,7 @@ addReviewForm.addEventListener('submit', async (e)=>{
         })
         console.log(response)
         if(response.status === 200){
+            console.log(response.data.review)
             const newListItem = document.createElement('li')
             const reviewParagraph = document.createElement('p')
             const reviewRatingParagraph = document.createElement('p')
